@@ -1,9 +1,9 @@
 const products = {
   llaveros: {
     category: 'Llaveros',
-    image: '/images/llaveros.png',
+    image: './images/llaveros.png',
     items: [
-      { id: 1, name: '   "A" a blanco y negro', price: 10000, image: '/images/llaveros/llavero6.jpg', description: 'Llavero personalizado a blanco y negro de manera horizontal' },
+      { id: 1, name: '   "A" a blanco y negro', price: 10000, image: './images/llaveros/llavero6.jpg', description: 'Llavero personalizado a blanco y negro de manera horizontal' },
       { id: 2, name: '"Llavero guitarra"', price: 10000, image: '/images/llaveros/llavero2.jpg', description: 'Llavero guitarra con iniciales' },
       { id: 3, name: '"I" a blanco y negro', price: 10000, image: '/images/llaveros/llavero3.jpg', description: 'Llavero personalizado a blanco y negro de manera horizontal' },
       { id: 4, name: '"M" amarilla con purpurina', price: 10000, image: '/images/llaveros/llavero5.jpg', description: 'letra con resina amarilla y purpurina' }
