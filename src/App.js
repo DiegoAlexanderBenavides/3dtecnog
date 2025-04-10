@@ -5,7 +5,6 @@ import Productos from './components/Productos';
 import Contacto from './components/Contacto';
 import Llaveros from './components/Llaveros';
 import Cuadros from './components/Cuadros';
-
 import Carrito from './components/Carrito';
 import products from './mock/products';
 
@@ -27,7 +26,7 @@ const App = () => {
         setCurrentView('cuadros');
         break;
       case 'cajoneras':
-        setCurrentView('cajoneras');
+        setCurrentView('llaveros');
         break;
       default:
         break;
@@ -69,7 +68,7 @@ const App = () => {
       case 'cuadros':
         return <Cuadros {...commonProps} />;
       case 'cajoneras':
-        return <Cajoneras {...commonProps} />;
+        return <Home {...commonProps} />;
       default:
         return <Home onCategoryClick={handleCategoryClick} />;
     }

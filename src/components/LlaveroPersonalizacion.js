@@ -8,10 +8,33 @@ const LlaveroPersonalizacion = ({ addToCart }) => {
   const [direccionDegradado, setDireccionDegradado] = useState('to right');
 
   const colores = [
-    '#000000', '#FFFFFF', '#FF0000', '#00FF00',
-    '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'
+    '#FF0000', // rojo (red)
+    '#FFFF00', // amarillo (yellow)
+    '#0000FF', // azul (blue)
+  
+    '#90EE90', // verde claro (light green)
+    '#00FF00', // verde (green)
+    '#013220', // verde oscuro (dark green)
+    '#ADD8E6', // azul claro (light blue)
+    '#4169E1', // azul royal (royal blue)
+    '#A020F0', // violeta / púrpura (violet / purple)
+    '#FFC0CB', // rosado (pink)
+    '#FF033E', // rojo rosado (rose red)
+    '#C11900', // rojo chino (chine red)
+    '#FFA500', // naranja (orange)
+    '#FFD700', // dorado (golden)
+    '#FFFFC5', // amarillo claro (light yellow)
+    '#6F4E37', // café (coffee)
+    '#808080', // gris (grey)
+    '#FF00FF', // fucsia (fuchsia)
+    '#000000', // negro (black)
+    '#FFFFFF'  // blanco (white)
   ];
-
+ // #90EE90(lith green) #FFFFC5(lith yelow) #ADD8E6  (lith blue) #0000FF (blue)
+ // #FFC0CB (pink) #6F4E37 (coffe) #FFFF00 (yellow) #000000 (negro) #A020F0 (violeta)
+ // #4169E1 (royalblue) #FFFFFF (blanco) #808080 (grey) #FF00FF (fusia) #C11900 (chine red)
+ // #013220 (dark green) #FF0000 (red) #FFA500 (orange) #00FF00 (verde) #FF033E (rose red)
+ // #A020F0 (purple) #FFD700 (golden)
   const direcciones = [
     { value: 'to right', label: 'Horizontal' },
     { value: 'to bottom', label: 'Vertical' }
@@ -26,13 +49,16 @@ const LlaveroPersonalizacion = ({ addToCart }) => {
     const personalizadoLlavero = {
       id: `personalizado-${Date.now()}`,
       name: `Llavero Personalizado - ${letra}`,
-      description: `Llavero con letra ${letra}, color ${usarDegradado ? `${colorPrincipal} a ${colorSecundario}` : colorPrincipal}`,
-      price: 50,
+      description: usarDegradado
+        ? `Llavero con letra ${letra}, degradado de ${colorPrincipal} a ${colorSecundario} (${direccionDegradado === 'to right' ? 'horizontal' : 'vertical'})`
+        : `Llavero con letra ${letra}, color sólido ${colorPrincipal}`,
+      price: 10000,
       image: null,
       personalizacion: {
         letra,
         colorPrincipal,
         colorSecundario: usarDegradado ? colorSecundario : null,
+        usarDegradado,
         direccionDegradado: usarDegradado ? direccionDegradado : null
       }
     };
