@@ -1,7 +1,6 @@
 {
   "name": "3dtecnog",
   "version": "1.0.0",
-  "main": "index.js",
   "homepage": "https://diegoalexanderbenavides.github.io/3dtecnog",
       "scripts": {
         "start": "react-scripts start",
