@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/3dtecnog/static/css/main.dd13bc6b.css",
-    "main.js": "/3dtecnog/static/js/main.e972ab41.js",
+    "main.js": "/3dtecnog/static/js/main.1575709c.js",
     "index.html": "/3dtecnog/index.html",
     "main.dd13bc6b.css.map": "/3dtecnog/static/css/main.dd13bc6b.css.map",
-    "main.e972ab41.js.map": "/3dtecnog/static/js/main.e972ab41.js.map"
+    "main.1575709c.js.map": "/3dtecnog/static/js/main.1575709c.js.map"
   },
   "entrypoints": [
     "static/css/main.dd13bc6b.css",
-    "static/js/main.e972ab41.js"
+    "static/js/main.1575709c.js"
   ]
 }
