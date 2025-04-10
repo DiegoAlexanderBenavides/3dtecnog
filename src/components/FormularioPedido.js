@@ -131,6 +131,11 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
           >
             Enviar Pedido
           </button>
+          <div className="flex justify-between font-bold text-xl border-t pt-2 mt-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+              En un momento nos comunicaremos
+            </label>
+              </div>
         </form>
       </div>
     </div>

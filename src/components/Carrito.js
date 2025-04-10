@@ -128,6 +128,7 @@ const Carrito = ({ cart, removeFromCart, onClose }) => {
               >
                 Proceder al Pago
               </button>
+              
             </div>
           )}
         </>

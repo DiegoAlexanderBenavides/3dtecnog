@@ -1,11 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
+  const imagenRef = useRef(null);
+  const [dimensionesImagen, setDimensionesImagen] = useState({ ancho: 20, alto: 0 });
+
+  // Márgenes extra para el marco (imagen iluminada)
+  const margenAncho = 0;
+  const margenAlto = 40;
+
   const [personalizacion, setPersonalizacion] = useState({
     texto: '',
     colorMarco: 'negro',
     tamaño: 'mediano',
   });
+
+  useEffect(() => {
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        setDimensionesImagen({ ancho: width, alto: height });
+      }
+    });
+
+    if (imagenRef.current) {
+      observer.observe(imagenRef.current);
+    }
+
+    return () => {
+      if (imagenRef.current) {
+        observer.unobserve(imagenRef.current);
+      }
+    };
+  }, [cuadro.overlay]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +44,10 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-6 relative">
+      <div className="bg-white rounded-2xl shadow-10xl max-w-3xl w-full p-6 relative overflow-auto max-h-[95vh]">
         <button 
           onClick={onCancel}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-50"
         >
           ✖
         </button>
@@ -30,21 +56,33 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
           Personalizar {cuadro.name}
         </h2>
 
-        {/* Vista previa con fondo y overlay */}
-        <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden bg-gray-100 shadow-inner">
-          <img
-            src="/images/cuadros/cuadrosFondoIluminado/azul.png" // tu fondo base
-            alt="Fondo"
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          />
-          <img
-            src={cuadro.overlay}
-            alt="Overlay del cuadro"
-            className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
-          />
+        {/* Vista previa */}
+        <div className="relative flex justify-center items-center w-full mb-6">
+          <div className="relative">
+            {/* Marco (imagen iluminada de fondo) */}
+            <img
+               src={`${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoIluminado/rojo.png`}
+              alt="Marco iluminado"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain z-10 pointer-events-none"
+              style={{
+                width: `${dimensionesImagen.ancho + margenAncho}px`,
+                height: `${dimensionesImagen.alto + margenAlto}px`,
+               // maxWidth: '95vw',
+               // maxHeight: '85vh',
+              }}
+            />
+
+            {/* Imagen principal */}
+            <img
+              ref={imagenRef}
+              src={cuadro.overlay}
+              alt="Overlay del cuadro"
+              className="w-[85vw] max-w-[300px] md:max-w-[400px] lg:max-w-[500px] h-auto object-contain z-20 pointer-events-none relative"
+            />
+          </div>
         </div>
 
-        {/* Controles de personalización */}
+        {/* Controles */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
