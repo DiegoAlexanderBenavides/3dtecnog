@@ -13,10 +13,14 @@ const products = {
     category: 'Cuadros',
     image: `${process.env.PUBLIC_URL}/images/cuadros/cuadros.jpg`,
     items: [
-      { id: 1, name: 'GOKU', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro1.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro5.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
-      { id: 2, name: 'NARUTO', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro2.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro3.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
-      { id: 3, name: 'Cuadro Arte Minimalista', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro3.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro5.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
-      { id: 4, name: 'RICK', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro5.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro5.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' }
+      { id: 1, name: 'GOKU', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro1.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro1.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 2, name: 'NARUTO', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro2.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro2.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 3, name: 'Cuadro Arte Minimalista', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro3.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro3.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 4, name: 'RICK', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro4.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro4.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 5, name: 'RICK', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro5.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro5.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 6, name: 'RICK', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro6.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro6.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 7, name: 'RICK', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro7.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro7.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' },
+      { id: 8, name: 'RICK', price: 25000, image: `${process.env.PUBLIC_URL}/images/cuadros/cuadro8.jpg`, overlay: `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoTransparente/cuadro8.png`, description: 'Cuadro decorativo en madera mdf 3mm con medida maxima de 40cm' }
     ]
   },
   cajoneras: {

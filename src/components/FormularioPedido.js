@@ -134,6 +134,8 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
           <div className="flex justify-between font-bold text-xl border-t pt-2 mt-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">
               En un momento nos comunicaremos
+              con 
+              usted
             </label>
               </div>
         </form>

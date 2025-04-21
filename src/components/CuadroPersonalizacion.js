@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
   const imagenRef = useRef(null);
-  const [dimensionesImagen, setDimensionesImagen] = useState({ ancho: 20, alto: 0 });
+  const [dimensionesImagen, setDimensionesImagen] = useState({ ancho: 0, alto: 0 });
 
-  // Márgenes extra para el marco (imagen iluminada)
-  const margenAncho = 0;
-  const margenAlto = 40;
+  const margenMarco = {
+    ancho: 160,
+    alto: 500,
+  };
 
   const [personalizacion, setPersonalizacion] = useState({
     texto: '',
@@ -42,6 +43,8 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
     onAddToCart({ ...cuadro, personalizacion });
   };
 
+  const marcoSrc = `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoIluminado/${personalizacion.colorMarco}.png`;
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-10xl max-w-3xl w-full p-6 relative overflow-auto max-h-[95vh]">
@@ -59,25 +62,23 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
         {/* Vista previa */}
         <div className="relative flex justify-center items-center w-full mb-6">
           <div className="relative">
-            {/* Marco (imagen iluminada de fondo) */}
+            {/* Marco iluminado */}
             <img
-               src={`${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoIluminado/rojo.png`}
-              alt="Marco iluminado"
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain z-10 pointer-events-none"
+              src={marcoSrc}
+              alt={`Marco ${personalizacion.colorMarco}`}
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain z-10 pointer-events-none max-w-[150vw] max-h-[250vh]"
               style={{
-                width: `${dimensionesImagen.ancho + margenAncho}px`,
-                height: `${dimensionesImagen.alto + margenAlto}px`,
-               // maxWidth: '95vw',
-               // maxHeight: '85vh',
+                width: `${dimensionesImagen.ancho + margenMarco.ancho}px`,
+                height: `${dimensionesImagen.alto + margenMarco.alto}px`,
               }}
             />
 
-            {/* Imagen principal */}
+            {/* Imagen transparente encima */}
             <img
               ref={imagenRef}
               src={cuadro.overlay}
               alt="Overlay del cuadro"
-              className="w-[85vw] max-w-[300px] md:max-w-[400px] lg:max-w-[500px] h-auto object-contain z-20 pointer-events-none relative"
+              className=" max-w-[300px] md:max-w-[400px] lg:max-w-[500px] h-auto object-contain z-20 pointer-events-none relative"
             />
           </div>
         </div>
@@ -107,26 +108,17 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             >
-              <option value="negro">Negro</option>
+              <option value="azul">Azul</option>
+              <option value="rojo">Rojo</option>
               <option value="blanco">Blanco</option>
-              <option value="madera">Madera</option>
+              <option value="amarillo">Amarillo</option>
+              <option value="azul_celeste">Azul Celeste</option>
+              <option value="morado">Morado</option>
+              <option value="rosado">Rosado</option>
+
             </select>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Tamaño
-            </label>
-            <select
-              name="tamaño"
-              value={personalizacion.tamaño}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            >
-              <option value="pequeño">Pequeño</option>
-              <option value="mediano">Mediano</option>
-              <option value="grande">Grande</option>
-            </select>
-          </div>
+        
         </div>
 
         <button
