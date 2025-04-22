@@ -117,7 +117,7 @@ const Carrito = ({ cart, removeFromCart, onClose }) => {
                 <div className="flex justify-between font-bold text-xl border-t pt-2 mt-2">
                   <span>Total</span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
-                    ${(total * 1.16).toFixed(2)}
+                    ${(total * 1).toFixed(2)}
                   </span>
                 </div>
               </div>
