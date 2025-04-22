@@ -111,7 +111,6 @@ const Carrito = ({ cart, removeFromCart, onClose }) => {
                   <span className="font-bold">${total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-gray-600">IVA (16%)</span>
                   <span className="font-bold">${(total ).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between font-bold text-xl border-t pt-2 mt-2">

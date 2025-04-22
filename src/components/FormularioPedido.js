@@ -17,8 +17,41 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
     }));
   };
 
+  const generateWhatsAppMessage = () => {
+    const itemsDetails = cart.map(item => {
+      let details = `- ${item.name} (${item.quantity} x $${item.price.toFixed(2)})`;
+      
+      if (item.personalizacion) {
+        details += `\n  Personalización:`;
+        details += `\n  Letra: ${item.personalizacion.letra}`;
+        details += `\n  Color Principal: ${item.personalizacion.colorPrincipal}`;
+        if (item.personalizacion.colorSecundario) {
+          details += `\n  Color Secundario: ${item.personalizacion.colorSecundario}`;
+        }
+        details += `\n  Estilo: ${item.personalizacion.estiloLetra}`;
+      } else if (item.category === 'cuadros') {
+        details += `\n  Tipo: Cuadro con luz de neón flex`;
+      }
+      
+      return details;
+    }).join('\n\n');
+
+    const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0) * 1.16;
+
+    return `Nuevo pedido de ${formData.nombre}:\n\n` +
+           `📦 Productos:\n${itemsDetails}\n\n` +
+           `💰 Total: $${total.toFixed(2)}\n\n` +
+           `📝 Notas: ${formData.notas || 'Ninguna'}\n\n` +
+           `📱 Contacto: ${formData.telefono}\n` +
+           `📧 Email: ${formData.email}\n` +
+           `🏠 Dirección: ${formData.direccion}`;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const message = generateWhatsAppMessage();
+    const whatsappUrl = `https://wa.me/573123456789?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
     onSubmit(formData);
   };
 
@@ -47,7 +80,7 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
             </div>
             <div className="ml-3">
               <p className="text-sm text-yellow-700">
-                En estos momentos estamos trabajando para que los pagos se puedan hacer de manera directa. Por el momento indica los siguientes datos y nos comunicaremos en breve para acordar método de pago, tiempo de envío y ajustar detalles si es necesario. Agradecemos su comprensión. 3dtecnog
+                Al enviar el pedido se abrirá WhatsApp para confirmar los detalles. Por favor verifica que toda la información sea correcta.
               </p>
             </div>
           </div>
@@ -125,19 +158,33 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
             />
           </div>
 
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-2">Resumen del Pedido</h3>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              {cart.map((item, index) => (
+                <div key={index} className="mb-2">
+                  <p className="font-medium">{item.name} x{item.quantity}</p>
+                  {item.personalizacion && (
+                    <div className="ml-4 text-sm text-gray-600">
+                      <p>Letra: {item.personalizacion.letra}</p>
+                      <p>Color: {item.personalizacion.colorPrincipal}</p>
+                      {item.personalizacion.colorSecundario && (
+                        <p>Color Secundario: {item.personalizacion.colorSecundario}</p>
+                      )}
+                      <p>Estilo: {item.personalizacion.estiloLetra}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white py-3 rounded-lg hover:opacity-90 transition"
           >
-            Enviar Pedido
+            Enviar Pedido por WhatsApp
           </button>
-          <div className="flex justify-between font-bold text-xl border-t pt-2 mt-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-              En un momento nos comunicaremos
-              con 
-              usted
-            </label>
-              </div>
         </form>
       </div>
     </div>
