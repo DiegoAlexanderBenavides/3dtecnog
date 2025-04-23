@@ -5,8 +5,8 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
   const [dimensionesImagen, setDimensionesImagen] = useState({ ancho: 0, alto: 0 });
 
   const margenMarco = {
-    ancho: 160,
-    alto: 500,
+    ancho: 280,
+    alto: 270,
   };
 
   const [personalizacion, setPersonalizacion] = useState({
@@ -16,23 +16,23 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
   });
 
   useEffect(() => {
-    const observer = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensionesImagen({ ancho: width, alto: height });
-      }
-    });
-
-    if (imagenRef.current) {
-      observer.observe(imagenRef.current);
+  const observer = new ResizeObserver(entries => {
+    for (let entry of entries) {
+      const { width, height } = entry.contentRect;
+      setDimensionesImagen({ ancho: width, alto: height });
     }
+  });
 
-    return () => {
-      if (imagenRef.current) {
-        observer.unobserve(imagenRef.current);
-      }
-    };
-  }, [cuadro.overlay]);
+  if (imagenRef.current) {
+    observer.observe(imagenRef.current);
+  }
+
+  return () => {
+    if (imagenRef.current) {
+      observer.unobserve(imagenRef.current);
+    }
+  };
+}, [cuadro.overlay]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +44,7 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
   };
 
   const marcoSrc = `${process.env.PUBLIC_URL}/images/cuadros/cuadrosFondoIluminado/${personalizacion.colorMarco}.png`;
-
+  console.log(dimensionesImagen.alto);
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-10xl max-w-3xl w-full p-6 relative overflow-auto max-h-[95vh]">
@@ -66,38 +66,27 @@ const CuadroPersonalizacion = ({ cuadro, onAddToCart, onCancel }) => {
             <img
               src={marcoSrc}
               alt={`Marco ${personalizacion.colorMarco}`}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain z-10 pointer-events-none max-w-[150vw] max-h-[250vh]"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain z-10 pointer-events-none max-w-[150vw] max-h-[1050vh]"
               style={{
                 width: `${dimensionesImagen.ancho + margenMarco.ancho}px`,
-                height: `${dimensionesImagen.alto + margenMarco.alto}px`,
+                height: `${dimensionesImagen.ancho + margenMarco.alto}px`,
               }}
             />
 
+
             {/* Imagen transparente encima */}
             <img
-              ref={imagenRef}
-              src={cuadro.overlay}
-              alt="Overlay del cuadro"
-              className=" max-w-[300px] md:max-w-[400px] lg:max-w-[500px] h-auto object-contain z-20 pointer-events-none relative"
+  ref={imagenRef}
+  src={cuadro.overlay}
+  alt="Overlay del cuadro"
+  className="h-[600px] w-auto object-contain z-20 pointer-events-none relative"
             />
           </div>
         </div>
 
         {/* Controles */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Texto personalizado
-            </label>
-            <input
-              type="text"
-              name="texto"
-              value={personalizacion.texto}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              placeholder="Ej: Para Juan"
-            />
-          </div>
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Color del marco

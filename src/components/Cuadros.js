@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import products from '../mock/products';
 import CuadroPersonalizacion from './CuadroPersonalizacion';
+import ModalProducto from './ModalProducto'; // <- Nuevo componente
 
 const Cuadros = ({ addToCart }) => {
   const cuadros = products.cuadros.items;
   const [cuadroSeleccionado, setCuadroSeleccionado] = useState(null);
+  const [modalCuadro, setModalCuadro] = useState(null);
 
   const handlePersonalizar = (cuadro) => {
     setCuadroSeleccionado(cuadro);
@@ -34,7 +36,8 @@ const Cuadros = ({ addToCart }) => {
             <img 
               src={cuadro.image} 
               alt={cuadro.name} 
-              className="w-full h-64 object-cover"
+              className="w-full h-64 object-cover cursor-pointer"
+              onClick={() => setModalCuadro(cuadro)}
             />
             <div className="p-4">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">{cuadro.name}</h2>
@@ -65,6 +68,13 @@ const Cuadros = ({ addToCart }) => {
           onCancel={handleCerrarPersonalizacion}
         />
       )}
+
+      {/* Reutilizamos el modal general */}
+      <ModalProducto 
+        producto={modalCuadro}
+        onClose={() => setModalCuadro(null)}
+        onAddToCart={addToCart}
+      />
     </div>
   );
 };

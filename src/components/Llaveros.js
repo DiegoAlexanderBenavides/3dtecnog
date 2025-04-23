@@ -5,7 +5,7 @@ import ModalProducto from './ModalProducto';
 
 const Llaveros = ({ addToCart }) => {
   const llaveros = products.llaveros.items;
-  const [activeTab, setActiveTab] = useState(' catalogo');
+  const [activeTab, setActiveTab] = useState('catalogo');
   const [selectedLlavero, setSelectedLlavero] = useState(null);
 
   const handleClickImagen = (llavero) => {
@@ -91,4 +91,3 @@ const Llaveros = ({ addToCart }) => {
 };
 
 export default Llaveros;
-
