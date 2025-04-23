@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Home from './components/Home';
 import Productos from './components/Productos';
@@ -6,19 +6,42 @@ import Contacto from './components/Contacto';
 import Llaveros from './components/Llaveros';
 import Cuadros from './components/Cuadros';
 import Carrito from './components/Carrito';
-import products from './mock/products';
+import AuthGoogle from './components/AuthGoogle';
+import UserProfile from './components/UserProfile';
 
 const App = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [currentView, setCurrentView] = useState('home');
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('craftmaster_user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoading(false);
+  }, []);
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    localStorage.setItem('craftmaster_user', JSON.stringify(userData));
+    setCurrentView('profile');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('craftmaster_user');
+    setUser(null);
+    setCurrentView('auth');
+  };
 
   const handleNavigation = (view) => {
     setCurrentView(view);
   };
 
   const handleCategoryClick = (category) => {
-    switch(category) {
+    switch (category) {
       case 'llaveros':
         setCurrentView('llaveros');
         break;
@@ -26,9 +49,10 @@ const App = () => {
         setCurrentView('cuadros');
         break;
       case 'cajoneras':
-        setCurrentView('llaveros');
+        setCurrentView('llaveros'); // ¿Quizás esto debería ser 'cajoneras'?
         break;
       default:
+        setCurrentView('home');
         break;
     }
   };
@@ -56,7 +80,12 @@ const App = () => {
 
   const renderView = () => {
     const commonProps = { addToCart };
-    switch(currentView) {
+
+    switch (currentView) {
+      case 'auth':
+        return <AuthGoogle onLogin={handleLogin} />;
+      case 'profile':
+        return user ? <UserProfile /> : <AuthGoogle onLogin={handleLogin} />;
       case 'home':
         return <Home onCategoryClick={handleCategoryClick} />;
       case 'productos':
@@ -68,23 +97,31 @@ const App = () => {
       case 'cuadros':
         return <Cuadros {...commonProps} />;
       case 'cajoneras':
-        return <Home {...commonProps} />;
+        return <Home onCategoryClick={handleCategoryClick} />;
       default:
         return <Home onCategoryClick={handleCategoryClick} />;
     }
   };
 
+  if (loading) {
+    return <div className="text-center py-8">Cargando aplicación...</div>;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header 
-        onNavigation={handleNavigation} 
+      <Header
+        user={user}
+        onNavigation={handleNavigation}
+        onLogout={handleLogout}
         toggleCart={toggleCart}
         cartItemCount={cart.length}
       />
-      {renderView()}
+      <main className="container mx-auto px-4 py-8">
+        {renderView()}
+      </main>
       {showCart && (
-        <Carrito 
-          cart={cart} 
+        <Carrito
+          cart={cart}
           removeFromCart={removeFromCart}
           onClose={toggleCart}
         />
@@ -94,5 +131,3 @@ const App = () => {
 };
 
 export default App;
-
-// DONE

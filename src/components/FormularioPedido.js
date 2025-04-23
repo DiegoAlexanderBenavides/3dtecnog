@@ -39,18 +39,18 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
     const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0) * 1.16;
 
     return `Nuevo pedido de ${formData.nombre}:\n\n` +
-           `📦 Productos:\n${itemsDetails}\n\n` +
-           `💰 Total: $${total.toFixed(2)}\n\n` +
-           `📝 Notas: ${formData.notas || 'Ninguna'}\n\n` +
-           `📱 Contacto: ${formData.telefono}\n` +
-           `📧 Email: ${formData.email}\n` +
-           `🏠 Dirección: ${formData.direccion}`;
+           ` Productos:\n${itemsDetails}\n\n` +
+           ` Total: $${total.toFixed(2)}\n\n` +
+           ` Notas: ${formData.notas || 'Ninguna'}\n\n` /*+
+           ` Contacto: ${formData.telefono}\n` +
+           ` Email: ${formData.email}\n` +
+           ` Dirección: ${formData.direccion}`*/;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const message = generateWhatsAppMessage();
-    const whatsappUrl = `https://wa.me/573123456789?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/573215024462?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     onSubmit(formData);
   };
@@ -101,7 +101,7 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
-            <div>
+           {/* <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Correo Electrónico *
               </label>
@@ -142,7 +142,7 @@ const FormularioPedido = ({ cart, onClose, onSubmit }) => {
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
-            </div>
+            </div>*/}
           </div>
 
           <div className="mb-6">

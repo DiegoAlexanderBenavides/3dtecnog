@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
 import products from '../mock/products';
 import LlaveroPersonalizacion from './LlaveroPersonalizacion';
+import ModalProducto from './ModalProducto';
 
 const Llaveros = ({ addToCart }) => {
   const llaveros = products.llaveros.items;
-  const [activeTab, setActiveTab] = useState('catalogo');
+  const [activeTab, setActiveTab] = useState(' catalogo');
+  const [selectedLlavero, setSelectedLlavero] = useState(null);
+
+  const handleClickImagen = (llavero) => {
+    setSelectedLlavero(llavero);
+  };
+
+  const cerrarModal = () => {
+    setSelectedLlavero(null);
+  };
 
   const renderCatalogo = () => (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -16,7 +26,8 @@ const Llaveros = ({ addToCart }) => {
           <img 
             src={llavero.image} 
             alt={llavero.name} 
-            className="w-full h-64 object-cover"
+            className="w-full h-64 object-cover cursor-pointer"
+            onClick={() => handleClickImagen(llavero)}
           />
           <div className="p-4">
             <h2 className="text-xl font-semibold text-gray-800 mb-2">{llavero.name}</h2>
@@ -68,8 +79,16 @@ const Llaveros = ({ addToCart }) => {
       </div>
 
       {activeTab === 'catalogo' ? renderCatalogo() : <LlaveroPersonalizacion addToCart={addToCart} />}
+
+      {/* Modal reutilizable */}
+      <ModalProducto 
+        producto={selectedLlavero}
+        onClose={cerrarModal}
+        onAddToCart={addToCart}
+      />
     </div>
   );
 };
 
 export default Llaveros;
+
